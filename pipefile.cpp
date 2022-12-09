@@ -35,7 +35,15 @@ void parent(const int& writePipeEndFd, const int& readFileFd)
 		// data read to the write end of
 		// the pipe. Keep repeating until
 		// the entire file read. 
+		bytesRead = read(-1, buff, READ_SIZE);
+		
+		//sanity check
+		if(bytesRead < 0){
+			perror("read");
+			exit(1);
+		}
 	}
+
 }
 
 // --------------------------------------------------
@@ -94,8 +102,25 @@ int main(int argc, char** argv)
 	}
 
 	// TODO: Create a pipe
+	{
+		if (pipe(fd)==-1){
+			fprintf(stderr, "Pipe FAILED.\n");
+			return 1;
+		}else{
+
+		}
+	}
 	
 	// TODO: Create a child process	
+	pid = fork();
+
+	/**if(pid <0){
+		fprintf(stderr, "FORK FAILED \n");
+
+	}else if(pid >0){
+		fprintf(fd[READ_SIZE])
+	}
+	**/
 	
 	// Sanity checks
 	if(pid < 0)
@@ -120,9 +145,10 @@ int main(int argc, char** argv)
 		parent(fd[1], inFd);
 		
 		// TODO: Close the pipe end the parent no longer needs
-		
+		parent(fd[0],inFd);
 		// TODO: Close the input file
-	}
+		close(inFd);
+	}	
 	else // Child
 	{
 
@@ -142,6 +168,8 @@ int main(int argc, char** argv)
 		child(fd[0], outFd);
 		
 		// TODO: Close the no longer needed end of the pipe
-		// TODO: Close the output file
+		child(fd[0], outFd);
+		// TODO: C, lose the output file
+		close(outFd);
 	}
 }
