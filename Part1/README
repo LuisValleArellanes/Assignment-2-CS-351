@@ -1,0 +1,7 @@
+How to use: 
+1)make sure file_recv.txt is clear
+2)compile and run reciever.x
+3) on another terminal instance use pgrep {recieve process} to obtain PID
+4) compile and run sender
+  a) ./sender file.txt {PID of recieve process} 
+5) recieve process should have been terminated and file_recv.txt should be updated
