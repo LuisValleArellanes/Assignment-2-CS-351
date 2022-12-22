@@ -9,7 +9,7 @@
 #include <sys/shm.h>
 #include <string.h>
 #include <mqueue.h>
-using namespace std;
+//using namespace std;
 
 
 void recvFile(int sigNum){
@@ -48,21 +48,22 @@ void recvFile(int sigNum){
     exit(1);
 }
 
+/*
 void messageQueue() {
 
-  mq_attr attr;
+  struct mq_attr attr;
 
   attr.mq_flags = 0;
   attr.mq_maxmsg = 10;
   attr.mq_msgsize = 4096;
-  attr.mq_curmsg = 0
+  attr.mq_curmsgs = 0;
 
   mqd_t qid = mq_open("/cpsc351sharedmem", O_CREAT | O_RDWR, 0744, &attr);
-  int recvMQ = mq_receive(qid, char buff[100], 4096, NULL);
-
+  char buff[100];
+  int retVal = mq_receive(qid, buff, 4096, NULL);
 
 }
-
+*/
 int main(){
 
     //override signal
