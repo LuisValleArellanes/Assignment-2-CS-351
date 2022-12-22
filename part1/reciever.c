@@ -49,7 +49,7 @@ void recvFile(int sigNum){
 
 void messageQueue() {
   mqd_t qid = mq_open("/cpsc351sharedmem", O_CREAT, 0777, &attr)
-  int recvMQ = mq_receive(qid, char buff[100], 4096, )
+  int recvMQ = mq_receive(qid, char buff[100], 4096, 10)
 }
 
 int main(){
