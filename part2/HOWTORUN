@@ -1,0 +1,7 @@
+1) COMPILE RECIEVER USING -> gcc reciever.c -o recv -lrt
+2) RUN USING ./RECV
+3) COMPILE SENDER ON NEW TERMINAL WINDOW -> gcc sender.c -o sender -lrt
+4) RUN USING ./sender file.txt
+
+NOTE:
+make sure file.txt has something written in it and make sure file_recv.txt is empty!
