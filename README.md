@@ -121,7 +121,7 @@ Terminate.
 The high-level skeletons for the sender and receiver can be found in the
 skeletons/mqueues
 .
-Part III: Message Pipes
+# Part III: Message Pipes
 The following outlines the structural and functional requirements of the pipes program. This
 program will be a little different from the above two as it will involve the transfer of file from
 the parent process to a child process across a pipe and therefore will require only one program.
