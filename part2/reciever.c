@@ -24,6 +24,17 @@ int main() {
   char buff[100];
   int retVal = mq_receive(qid, buff, 4096, NULL);
 
+  FILE *f = fopen("file_recv.txt", "w");
+  while(retVal > 0){
+    fprintf(f, "%s", buff);
+
+  }
+  if (retVal == 0){
+    fclose(f);
+    unlink("/cpsc351sharedmem");
+  }
+
+
 
   return 0;
 
