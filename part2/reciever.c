@@ -11,31 +11,27 @@
 #include <mqueue.h>
 
 
-int main() {
 
-  struct mq_attr attr;
-
+int main(int argc, char *argv[]){
+struct mq_attr attr;
   attr.mq_flags = 0;
   attr.mq_maxmsg = 10;
   attr.mq_msgsize = 4096;
   attr.mq_curmsgs = 0;
 
-  mqd_t qid = mq_open("/cpsc351sharedmem", O_CREAT | O_RDWR, 0744, &attr);
-  char buff[100];
-  int retVal = mq_receive(qid, buff, 4096, NULL);
+  mqd_t mid = mq_open("/cpsc351mqueue", O_CREAT | O_RDWR, 0744, &attr);
 
+  char buff[4096];
+  int retval;
   FILE *f = fopen("file_recv.txt", "w");
-  while(retVal > 0){
+  while(retval = mq_receive(mid,buff, 4096, NULL) > 0){
     fprintf(f, "%s", buff);
-
   }
-  if (retVal == 0){
+  if (retval == 0){
     fclose(f);
-    unlink("/cpsc351sharedmem");
+    unlink("/cpsc351queue");
+    exit(1);
   }
-
-
 
   return 0;
-
 }
