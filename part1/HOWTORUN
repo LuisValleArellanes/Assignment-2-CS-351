@@ -1,8 +1,9 @@
 -make sure file_recv.txt is empty
--compile and run reciever
+-compile and run reciever -> USE THIS OR IT WILL NOT WORK -> gcc reciever.c -o recv -lrt
 -on diff terminal instance, compule sender
   - do pgrep {reciever process name} to obtain PID 
-  - run sender -> ./sender file.txt {PID} 
+  - run sender -> USE THIS OR IT WILL NOT WORK -> gcc sender.c -o sender -lrt
+  - ./sender file.txt {PID} 
   
--reciever should have been terminated
+-reciever should be terminated
 -file_recv.txt should be updates
