@@ -21,10 +21,10 @@ The sections that follow outline the differences between the programs.
 The sender and the receiver programs will work as follows:
 The Receiver:
 
-1. The receiver shall be started before the sender. It shall be invoked as ./recv from the command line.
-2. When launched, it shall override the default signal handler function for the
+#1. The receiver shall be started before the sender. It shall be invoked as ./recv from the command line.
+#2. When launched, it shall override the default signal handler function for the
 SIGUSR1 sig-nal (the signal reserved for custom uses by user programs) with a function called void recvFile(int sigNum). After doing so, the program shall go into a sleeping loop where it will sleep until a SIGUSR1 signal arrives.
-3. Once the SIGUSR1 signal arrives, the program shall invoke the recvFile function. The function shall perform the following operations:
+#3. Once the SIGUSR1 signal arrives, the program shall invoke the recvFile function. The function shall perform the following operations:
 
 (a) Get the shared memory ID for the shared memory segment named
 cpsc351sharedmem. If the segment does not exist, the receiver exits with an error ‘‘Missing shared memory segment!". Otherwise, if the segment exists, the receiver continues to the next step.
@@ -40,37 +40,10 @@ The Sender:
   
 The following outlines the structural and functional requirements of the two programs:
 The Receiver:
-1.
-The receiver shall be invoked as
-./recv
-.
-2.
-The receiver shall allocate a message queue named
-cpsc351queue
-and is configured to
-hold 10 messages with the maximum message size of 4096 bytes. The receiver shall than
-call the
-mq
-receive()
-system call that shall do the following.
-3.
-Next, the receiver shall block until the queue contains a message (this is the default
-behavior of
-mq
-receive()
-as discussed in class).
-4.
-When the message arrives, the receiver shall receive the message and check its length.
-•
-If the length of the message is greater than 0, then the receiver shall write the message
-contents into file called
-file
-recv
-and then go back calling
-mq
-receive()
-to wait
-for another message.
+1. The receiver shall be invoked as ./recv
+2. The receiver shall allocate a message queue named cpsc351queue and is configured to hold 10 messages with the maximum message size of 4096 bytes. The receiver shall than call the mq receive() system call that shall do the following.
+3. Next, the receiver shall block until the queue contains a message (this is the default behavior of mq receive() as discussed in class).
+4. When the message arrives, the receiver shall receive the message and check its length. If the length of the message is greater than 0, then the receiver shall write the message contents into file called file recv and then go back calling mq receive() to wait for another message.
 •
 If the length of the message is 0, then this means the sender is done sending the
 message. The receiver should close the file, deallocate the shared memory segment,
